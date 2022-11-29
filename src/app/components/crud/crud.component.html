@@ -1,0 +1,162 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div aria-label="breadcrumb">
+                <h3 title="employee List">dashboard</h3>
+
+                <div *ngIf="this.users.length === 0; else showAddButtonInEmptyListDiv ">
+                    
+                        <div>
+                            <button class="btn btn-primary" (click)="onOpen(content)" title="Add New employee"><img title="add"
+                                    src="../../assets/plus.svg" />Add New employee</button>
+                        </div>
+        
+
+                </div>
+
+            </div>
+            <br>
+            <div class="table-div" *ngIf="this.users.length > 0 ; else showEmpltyEmpoyeeList ">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th title="ID">ID</th>
+                            <th title="Name">Name</th>
+                            <th title="Email">Email</th>
+                            <th title="Gender">Gender</th>
+                            <th title="location">Location</th>
+                            <th [width]="128" title="Actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of users">
+                            <td>{{ i.id ? i.id : 'Not Found' }}</td>
+                            <td>{{ i.name ? i.name : 'Not Found' }}</td>
+                            <td>{{ i.email ? i.email : 'Not Found' }}</td>
+                            <td>{{ i.gender ? i.gender : 'Not Found' }}</td>
+                            <td>{{i.locations ? i.locations : 'Not Found'}}</td>
+                            <td>
+                                <div class="actionButtonContainer">
+                                    <button title="edit" class="btn btn-primary" (click)="onEditOfUser(i, content)">
+                                        <img title="edit" src="../../assets/pencil.svg" class="actionButtonIcon" />
+                                    </button>
+                                    <button class="btn  btn-danger" (click)="onDeleteUser(i.id)" title="Delete">
+                                        <img title="delete" src="../../assets/trash.svg" class="actionButtonIcon" />
+                                    </button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #showEmpltyEmpoyeeList>
+                <div class="emptyEmployeeList">
+                    <p>Oops! There are no Employees here</p>
+
+                </div>
+            </ng-template>
+            <ng-template #showAddButtonInEmptyListDiv>
+                <div>
+                    <button class="btn btn-primary" (click)="onOpen(content)" title="Add New employee"><img title="add"
+                            src="../../assets/plus.svg" />Add New employee</button>
+                </div>
+
+            </ng-template>
+
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">{{selectedUser? "Edit employee": "New Employee"}}
+                    </h4>
+                    <button type="button" class="close" aria-label="close" (click)="onClose(modal)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form [formGroup]="employeeDetailsForm" (ngSubmit)="onSubmit(modal)" novalidate>
+
+                        <div class="form-group">
+                            <label for="name"> Name</label>
+                            <div class="input-group">
+                                <input id="name" class="form-control" name="name" formControlName="name">
+                            </div>
+
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="email">email</label>
+                            <div class="input-group">
+                                <input id="email" class="form-control" name="email" formControlName="email">
+                            </div>
+
+                        </div>
+                        <br>
+
+                        <div class="radioButtonContainer">
+                            <label for="gender">gender</label>
+                            <div class="form-check">
+
+                                <input class="form-check-input" id="flexRadioDefault1" type="radio" name="gender"
+                                    formControlName="gender" value="male">
+                                <label class="form-check-label" for="flexRadioDefault1">male</label>
+
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" id="flexRadioDefault2" type="radio"
+                                    formControlName="gender" value="female" name="gender">
+                                <label class="form-cjeck-label" for="flexRadioDefault2">female</label>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- <label class="image-upload-container btn btn-bwm">
+                            <span>Select Image</span>
+                            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+                        </label> -->
+                        <div class="btn-group">
+
+                            <label>Location : </label>
+                            <select formControlName="locations" name="locations" (change)="changeLocation($event)">
+                                <option disabled>Choose Value</option>
+
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Default
+                                    <span class="caret"></span>
+                                </button>
+
+                                <option value="">Choose location</option>
+                                <option *ngFor="let location of Locations">
+                                    <!-- <ng-template *ngIf="location === this.employeeDetailsForm.locations.value">
+
+                                </ng-template> -->
+                                    {{location}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="isValidated" class="alert alert-danger mt-2">
+                                Please choose some value
+                            </div>
+
+                        </div>
+                        <br>
+
+
+                        <br>
+                        <div class="text-center">
+
+                            <button [disabled]="isButtonDisabled()" data-dismiss="modal"
+                                class="btn btn-info">Submit</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+</div>
