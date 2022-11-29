@@ -1,0 +1,41 @@
+@import "../../mixin.scss";
+
+.emptyEmployeeListColor {
+    color: color(primary)
+}
+
+.emptyEmployeeList {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButtonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.actionButtonIcon {
+    height: 15px;
+    width:15px
+}
+
+.radioButtonContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}
+
+.form-control:focus {
+    border-color: #ff80ff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+}
+
+.proflePicContainer {
+    height: 100px;
+    width: 100px;
+    
+}

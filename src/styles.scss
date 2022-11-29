@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./mixin.scss";
+
+@import '~bootstrap/scss/bootstrap';
+
+
+:root {
+    --color-primary: #0d5f9b;
+    
+}
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

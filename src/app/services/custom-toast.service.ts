@@ -10,7 +10,7 @@ export class CustomToastService {
   constructor(private toastr: ToastrService) { }
 
   showSuccess(message : any,title : any) {
-    this.toastr.success(message, title)
+    this.toastr.success(message, title,)
   }
 
   showError(message : any, title : any) {
